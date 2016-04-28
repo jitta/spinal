@@ -120,6 +120,7 @@ describe('Node', function () {
 
     it('Should pass all middleware', function (done) {
       var a = 0
+      
       spinal.provide('jump', function (arg, res, options, next) {
         a++
         next()
