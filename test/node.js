@@ -148,6 +148,93 @@ describe('Node', function () {
       })
     })
 
+    it('Should not pass middleware of another method', function (done) {
+      var a = 0
+      var b = 0
+      
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        next()
+      })
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        res.error('middleware error 2')
+      })
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        next()
+      })
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        res.send(arg)
+      })
+      spinal.provide('jump1', function (arg, res, options, next) {
+        b++
+        next()
+      })
+      spinal.provide('jump1', function (arg, res) {
+        res.send(arg)
+      })
+
+
+      spinal.start(function () {
+        spinal.call('jump1', {a: 1, b: 2}, function (err, result) {
+
+          expect(result).to.deep.equal({a: 1, b: 2})
+          expect(a).to.equal(0)
+          expect(b).to.equal(1)
+          done()
+        })
+      })
+    })
+
+    it('Should pass middleware of method', function (done) {
+      var a = 0
+      var b = 0
+
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        next()
+      })
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        next()
+      })
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        next()
+      })
+      spinal.provide('jump2', function (arg, res, options, next) {
+        a++
+        res.send(arg)
+      })
+      spinal.provide('jump1', function (arg, res, options, next) {
+        b++
+        next()
+      })
+      spinal.provide('jump1', function (arg, res) {
+        res.send(arg)
+      })
+
+
+      spinal.start(function () {
+        spinal.call('jump2', {a: 3, b: 3}, function (err, result) {
+
+          expect(result).to.deep.equal({a: 3, b: 3})
+          expect(a).to.equal(4)
+          expect(b).to.equal(0)
+
+          spinal.call('jump2', {a: 3, b: 3}, function (err, result) {
+
+            expect(result).to.deep.equal({a: 3, b: 3})
+            expect(a).to.equal(8)
+            expect(b).to.equal(0)
+            done()
+          })
+        })
+      })
+    })
+    
     it('Should error when middleware res.error call', function (done) {
       var a = 0
       spinal.provide('jump', function (arg, res, options, next) {
