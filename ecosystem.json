@@ -1,0 +1,27 @@
+{
+  "apps" : [
+  {
+    "name"      : "spinal-broker",
+    "script"    : "bin/run",
+    "log_date_format" : "YYYY-MM-DD HH:mm:ss Z",
+    "error_file" : "/var/log/pm2/spinal-broker-err.log",
+    "out_file"   : "/var/log/pm2/spinal-broker-out.log",
+    "env"       : {
+
+    },
+    "env_production" : {
+      "NODE_ENV": "production"
+    },
+    "env_test" :{
+      "NODE_ENV": "test"
+    },
+    "env_dev" :{
+      "NODE_ENV": "dev"
+    },
+    "env_local" :{
+      "NODE_ENV": "local",
+      "DEBUG": "spinal*"
+    }
+  }
+]
+}

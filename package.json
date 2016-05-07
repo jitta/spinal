@@ -10,6 +10,10 @@
   "preferGlobal": true,
   "main": "index.js",
   "scripts": {
+    "pm2-local": "pm2 startOrRestart ecosystem.json --env local",
+    "pm2-dev": "pm2 startOrRestart ecosystem.json --env development",
+    "pm2-test": "pm2 startOrRestart ecosystem.json --env test",
+    "pm2-prod": "pm2 startOrRestart ecosystem.json --env production",
     "test": "./node_modules/.bin/istanbul cover node_modules/.bin/_mocha",
     "test-ci": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- test/",
     "preversion": "./node_modules/.bin/istanbul cover node_modules/.bin/_mocha"

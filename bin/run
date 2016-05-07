@@ -1,0 +1,19 @@
+#!/usr/bin/env node
+
+var Broker = require('../').Broker;
+var spinal = null;
+// var package = require('../package.json');
+// var config =  require('../configs/env_config');
+var config = {};
+
+var broker = new Broker({
+  redis: config.redis || 6379,
+  restapi: config.restApiPort || 8889
+});
+
+var port = process.env.PORT || config.bindPort || 8888;
+
+broker.start(port, function(){
+  console.log('env: ' + process.env.NODE_ENV);
+  console.log('Spinal:Broker listening...' + this.port)
+});
