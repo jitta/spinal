@@ -4,7 +4,8 @@ var Broker = require('../').Broker;
 var spinal = null;
 // var package = require('../package.json');
 // var config =  require('../configs/env_config');
-var config = {};
+// var config = {};
+var config = require('./config.json');
 
 var broker = new Broker({
   redis: config.redis || 6379,
