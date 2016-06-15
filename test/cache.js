@@ -109,7 +109,7 @@ describe('Cache', function() {
             expect(header.cache_id).to.equal('KEY')
             done()
           })
-        }, 1000)
+        }, 1500)
       })
     })
   })

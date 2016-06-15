@@ -10,6 +10,8 @@
   "preferGlobal": true,
   "main": "index.js",
   "scripts": {
+    "start-pm2-test": "pm2 startOrReload ecosystem.json --env test",
+    "start-pm2-prod": "pm2 startOrReload ecosystem.json --env production",
     "test": "./node_modules/.bin/istanbul cover node_modules/.bin/_mocha",
     "test-ci": "./node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- test/",
     "preversion": "./node_modules/.bin/istanbul cover node_modules/.bin/_mocha"
@@ -22,15 +24,16 @@
     "debug": "^2.2.0",
     "express": "^4.13.1",
     "ioredis": "^1.5.1",
+    "istanbul": "^0.3.22",
     "jade": "^1.11.0",
     "json-stringify-safe": "^5.0.1",
-    "kue": "^0.9.3",
-    "lodash": "^3.9.3",
+    "kue": "^0.10.5",
+    "lodash": "^4.11.1",
     "measured": "^1.0.0",
     "pm2-axon": "^2.0.8",
     "pm2-axon-rpc": "^0.3.6",
     "puid": "^1.0.5",
-    "qs": "^4.0.0"
+    "qs": "^6.1.0"
   },
   "keywords": [
     "axon",
