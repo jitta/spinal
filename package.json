@@ -24,7 +24,7 @@
     "ioredis": "^1.5.1",
     "jade": "^1.11.0",
     "json-stringify-safe": "^5.0.1",
-    "kue": "^0.9.3",
+    "kue": "0.11.4",
     "lodash": "^3.9.3",
     "measured": "^1.0.0",
     "pm2-axon": "^2.0.8",
