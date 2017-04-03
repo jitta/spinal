@@ -153,6 +153,24 @@ describe('Queue', function() {
         })
       })
     })
+
+    it('Remove completed job if removeOnComplete is set to true', function(done){
+      spinal.worker('test-d', function (data, res) {
+        res.send(data.stock)
+      })
+      spinal.start(function() {
+        spinal.job('q-test-client.test-d', {stock: 'TSLA'})
+          .removeOnComplete(true)
+          .onComplete(function (result) {
+            expect(result).to.equal('TSLA')
+            broker.queue.q.complete(function (err, ids) {
+              expect(ids.length).to.equal(0)
+              done()
+            })
+          })
+          .save()
+      })
+    })
   })
 
 
