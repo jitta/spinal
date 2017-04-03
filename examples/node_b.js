@@ -1,6 +1,6 @@
 var Spinal = require('../').Node
 
-var spinal = new Spinal('spinal://127.0.0.1:5000', {
+var spinal = new Spinal('spinal://127.0.0.1:7557', {
   namespace: 'blackman'
 })
 
@@ -11,20 +11,17 @@ spinal.provide('loadStock', function(data, res){
 
 spinal.start(function(){
   console.log('node_b: `'+this.namespace+'` ready')
-  // spinal.call('midman.test', {a:1, b:2}, function(err, data){
-  //   console.log(data)
-  // })
-  // spinal.call('loadStock', {stock_id:'NASDAQ:AAPL'}, function(err, data){
-  //   console.log(data)
-  // })
   setTimeout(function(){
     spinal.job('midman.tryCache', {stock_id:'NASDAQ:AAPL'}, {cache_id:'date'})
-    .complete(function(result) {
-      console.log('complete', result)
-    })
-    .save(function(err, jobId) {
-      console.log('saved', arguments)
-    })
+      // Set this option to let Kue remove your jobs when they are completed (not failed).
+      // This will prevent your Redis eat up all of the memory.
+      // .removeOnComplete(true)
+      .onComplete(function(result) {
+        console.log('complete', result)
+      })
+      .save(function(err, jobId) {
+        console.log('saved', arguments)
+      })
   }, 1000)
 })
 

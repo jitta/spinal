@@ -64,6 +64,7 @@ program
   .description('create a job')
   .option('-b, --broker [broker]', 'Broker URI', 'spinal://localhost:7557')
   .option('--priority [priority]', 'Job prioirty low, normal, medium, high, critical', /^(low|normal|medium|high|critical)$/, 'normal')
+  .option('--remove-on-complete [removeOnComplete]', 'Remove jobs when it has completed', /^(true|false)$/, 'false')
   .option('--attempts [times]', 'Try to attempts after job failed', /^([0-9]+)$/, 1)
   .option('--ttl, --timeout [miliseconds]', 'Job timeout in miliseconds', /^([0-9]+)$/)
   .option('--delay [miliseconds]', 'Delay before start a job', /^([0-9]+)$/)
@@ -76,9 +77,9 @@ program
       // if(options.ttl) options.ttl = parseInt(options.ttl)
       // if(options.delay) options.delay = parseInt(options.delay)
       // if(options.backoff) options.backoff = parseInt(options.backoff)
-
       var job = spinal.job(name, data)
       .priority(options.priority)
+      .removeOnComplete(options.removeOnComplete)
       .attempts(options.attempts)
       .ttl(options.ttl)
       .delay(options.delay)

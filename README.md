@@ -144,6 +144,7 @@ spinalA.worker('send', function(data, res){
 // create a job
 spinalB.job('newsletter.send', {email: 'some@one.com'})
 .priority('high')            // set priority: low, normal, medium, high, critical
+.removeOnComplete(false)     // if this is set to true, completed jobs (not failed) will be remove from Redis
 .attempts(2)                 // use 2 times to process a job if it fail. try one more time
 .ttl(10000)                  // timeout in 10s
 .delay(5000)                 // before start delay for 5s
