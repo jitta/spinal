@@ -271,14 +271,14 @@ Kue) and some rest API in JSON format
 ## Command Line
 You can access `spinal` command as a global by `npm install -g spinal` in case
 you might want to start broker easier `spinal broker` or `spinal broker -d` for
-localhost devlopment enviroment. Incase you want to test a simple method
+localhost devlopment environment. Incase you want to test a simple method
 `spinal call stock.query {sector:'Technology'}`
 
 ```
 Usage: spinal [options] [command]
 
 Commands:
-  console                         run javascript console with spinal enviroment
+  console                         run javascript console with spinal environment
   call [options] <method> [data]  call spinal method
   job [options] <name> [data]     create a job
   broker [options]                start a broker service
